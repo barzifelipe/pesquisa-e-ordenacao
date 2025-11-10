@@ -9,8 +9,12 @@ public class QuickSort {
         String pivo = lista.get((esq + dir) / 2).getNome();
 
         do {
-            while (lista.get(i).getNome().compareTo(pivo) < 0) i++;
-            while (lista.get(j).getNome().compareTo(pivo) > 0) j--;
+            while (lista.get(i).getNome().compareTo(pivo) < 0){
+                i++;
+            }
+            while (lista.get(j).getNome().compareTo(pivo) > 0){
+                j--;
+            }
 
             if (i <= j) {
                 Reserva temp = lista.get(i);
@@ -21,7 +25,11 @@ public class QuickSort {
             }
         } while (i <= j);
 
-        if (esq < j) ordenarArquivoQuick(lista, esq, j);
-        if (i < dir) ordenarArquivoQuick(lista, i, dir);
+        if (esq < j){
+            ordenarArquivoQuick(lista, esq, j);
+        }
+        if (i < dir){
+            ordenarArquivoQuick(lista, i, dir);
+        }
     }
 }
