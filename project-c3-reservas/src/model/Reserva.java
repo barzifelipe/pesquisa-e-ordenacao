@@ -1,3 +1,5 @@
+package model;
+
 public class Reserva {
 
     private final String codigo;
