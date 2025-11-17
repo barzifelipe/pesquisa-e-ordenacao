@@ -10,6 +10,6 @@ public class MainQuickIns {
         ArrayList<Reserva> lista = new ArrayList<>();
         UtilsArquivo.lerArquivo("caminho/arquivo.txt", lista);
         QuickIns.ordenarArquivoQuickIns(lista, 0, lista.size() - 1);
-        UtilsArquivo.salvarArquivo(lista, "caminho para salvar");
+        UtilsArquivo.salvarArquivo(lista);
     }
 }

@@ -1,18 +1,19 @@
 package  sort;
 
 import java.util.ArrayList;
+import controller.UtilsSort;
 import model.Reserva;
 
 public class QuickSort {
     public  static void ordenarArquivoQuick(ArrayList<Reserva> lista, int esq, int dir) {
         int i = esq, j = dir;
-        String pivo = lista.get((esq + dir) / 2).getNome();
+        Reserva pivo = lista.get((esq + dir) / 2);
 
         do {
-            while (lista.get(i).getNome().compareTo(pivo) < 0){
+            while (UtilsSort.comparar(lista.get(i), pivo) < 0){
                 i++;
             }
-            while (lista.get(j).getNome().compareTo(pivo) > 0){
+            while (UtilsSort.comparar(lista.get(j), pivo) > 0){
                 j--;
             }
 

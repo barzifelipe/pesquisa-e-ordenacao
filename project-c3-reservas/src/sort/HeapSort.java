@@ -2,6 +2,7 @@ package sort;
 
 import java.util.ArrayList;
 import model.Reserva;
+import controller.UtilsSort;
 
 public class HeapSort {
     public static void ordenarArquivoHeap(ArrayList<Reserva> lista, int esq, int dir){
@@ -31,10 +32,10 @@ public class HeapSort {
 
         while((mF <= dir) && (!heap)){
             if(mF < dir){
-                if(lista.get(mF).getNome().compareTo(lista.get(mF+1).getNome()) < 0){
+                if(UtilsSort.comparar(lista.get(mF), lista.get(mF+1)) < 0){
                     mF++;
                 }
-                if(raiz.getNome().compareTo(lista.get(mF).getNome()) < 0){
+                if(UtilsSort.comparar(raiz, lista.get(mF))< 0){
                     lista.set(i, lista.get(mF));
                     i = mF;
                     mF = 2*i+1;
