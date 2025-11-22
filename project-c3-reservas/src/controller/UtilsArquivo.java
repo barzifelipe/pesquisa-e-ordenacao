@@ -27,8 +27,11 @@ public class UtilsArquivo {
         }
     }
 
-    public static void salvarArquivo(ArrayList<Reserva> lista) {
-        try (PrintWriter pw = new PrintWriter(new FileWriter("C:\\Users\\Felipe\\OneDrive\\Documentos\\Faculdade\\3 Período\\pesquisa-e-ordenacao\\project-c3-reservas\\resultados"))) {
+    public static void salvarArquivo(ArrayList<Reserva> lista, String subpasta, String nomeArquivo) {
+        File pasta = new File("resultados/" + subpasta);
+        File arquivo = new File(pasta, nomeArquivo);
+
+        try (PrintWriter pw = new PrintWriter(new FileWriter(arquivo))) {
             for (Reserva r : lista) {
                 pw.println(r.getCodigo() + ";" +
                         r.getNome() + ";" +

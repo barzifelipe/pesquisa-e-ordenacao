@@ -7,7 +7,6 @@ public class UtilsSort {
         if (comparacao != 0){
             return comparacao;
         }
-
         return a.getCodigo().compareToIgnoreCase(b.getCodigo());
     }
 }
