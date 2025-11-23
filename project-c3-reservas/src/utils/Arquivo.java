@@ -1,11 +1,11 @@
-package controller;
+package utils;
 
 import java.io.*;
 import java.util.ArrayList;
 import model.Reserva;
 
 
-public class UtilsArquivo {
+public class Arquivo {
     public static void lerArquivo(String caminho, ArrayList<Reserva> lista) {
         try (BufferedReader br = new BufferedReader(new FileReader(caminho))) {
             String linha;
@@ -29,7 +29,7 @@ public class UtilsArquivo {
     }
 
     public static void salvarArquivo(ArrayList<Reserva> lista, String subpasta, String nomeArquivo) {
-        File resultados = new File("resultados/" + subpasta);
+        File resultados = new File("project-c3-reservas/resultados/" + subpasta);
 
         if (!resultados.exists()){
             resultados.mkdirs();

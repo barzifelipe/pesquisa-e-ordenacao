@@ -1,7 +1,7 @@
-package controller;
+package utils;
 import model.Reserva;
 
-public class UtilsSort {
+public class Sort {
     public static int comparar(Reserva a, Reserva b){
         int comparacao = a.getNome().compareToIgnoreCase(b.getNome());
         if (comparacao != 0){

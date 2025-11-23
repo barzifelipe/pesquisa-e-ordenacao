@@ -2,16 +2,16 @@ package sort;
 
 import java.util.ArrayList;
 import model.Reserva;
-import controller.UtilsSort;
+import utils.Sort;
 
 public class HeapSort {
-    public static void ordenarArquivoHeap(ArrayList<Reserva> lista, int esq, int dir){
-        dir = lista.size()-1;
-        esq = (dir -1)/2;
+    public static void ordenarArquivoHeap(ArrayList<Reserva> lista){
+        int dir = lista.size()-1;
+        int esq = (dir -1)/2;
         Reserva temp;
 
         while (esq >= 0){
-            refazerHeap(lista, esq, lista.size());
+            refazerHeap(lista, esq, lista.size()-1);
             esq--;
         }
 
@@ -30,12 +30,13 @@ public class HeapSort {
         Reserva raiz = lista.get(i);
         boolean heap = false;
 
-        while((mF <= dir) && (!heap)){
-            if(mF < dir){
-                if(UtilsSort.comparar(lista.get(mF), lista.get(mF+1)) < 0){
+        while((mF <= dir && !heap)){
+            if(mF+1 <= dir) {
+                if (Sort.comparar(lista.get(mF), lista.get(mF + 1)) < 0) {
                     mF++;
                 }
-                if(UtilsSort.comparar(raiz, lista.get(mF))< 0){
+            }
+                if(Sort.comparar(raiz, lista.get(mF))< 0){
                     lista.set(i, lista.get(mF));
                     i = mF;
                     mF = 2*i+1;
@@ -44,8 +45,8 @@ public class HeapSort {
                     heap = true;
                 }
             }
-            lista.set(i, raiz);
-        }
+
+        lista.set(i, raiz);
 
     }
 }

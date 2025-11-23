@@ -1,7 +1,7 @@
 package  sort;
 
 import java.util.ArrayList;
-import controller.UtilsSort;
+import utils.Sort;
 import model.Reserva;
 
 public class QuickSort {
@@ -10,10 +10,10 @@ public class QuickSort {
         Reserva pivo = lista.get((esq + dir) / 2);
 
         do {
-            while (UtilsSort.comparar(lista.get(i), pivo) < 0){
+            while (Sort.comparar(lista.get(i), pivo) < 0){
                 i++;
             }
-            while (UtilsSort.comparar(lista.get(j), pivo) > 0){
+            while (Sort.comparar(lista.get(j), pivo) > 0){
                 j--;
             }
 
