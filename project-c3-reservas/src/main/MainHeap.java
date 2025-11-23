@@ -11,13 +11,13 @@ public class MainHeap {
     public static void main(String[] args) {
         ArrayList<Reserva> lista = new ArrayList<>();
 
-        for(String nomeArquivo : Paths.NOME_ARQUIVOS) {
-            for (int i = 0; i < 5; i++) {
-                UtilsArquivo.lerArquivo(Paths.BASE_PATH + "/" + nomeArquivo, lista);
-                HeapSort.ordenarArquivoHeap(lista, 0, lista.size() - 1);
-                UtilsArquivo.salvarArquivo(lista, "heap", "heap_" + nomeArquivo);
-            }
+        for (String nomeArquivo : Paths.ARQUIVOS) {
+
+            lista.clear();
+
+            UtilsArquivo.lerArquivo(Paths.BASE_PATH + nomeArquivo, lista);
+            HeapSort.ordenarArquivoHeap(lista, 0, lista.size() - 1);
+            UtilsArquivo.salvarArquivo(lista, "heap", "heap_" + nomeArquivo);
         }
     }
-
 }

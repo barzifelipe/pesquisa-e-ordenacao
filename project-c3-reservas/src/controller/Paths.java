@@ -1,9 +1,9 @@
 package controller;
 
 public class Paths  {
-    public static final String BASE_PATH = "arquivosTeste";
+    public static final String BASE_PATH = "project-c3-reservas/arquivosTeste/";
 
-    public static final String [] NOME_ARQUIVOS = {
+    public static final String [] ARQUIVOS = {
             "Reserva500alea.txt",
             "Reserva500inv.txt",
             "Reserva500ord.txt",

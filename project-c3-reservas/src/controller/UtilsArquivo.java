@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import model.Reserva;
 
+
 public class UtilsArquivo {
     public static void lerArquivo(String caminho, ArrayList<Reserva> lista) {
         try (BufferedReader br = new BufferedReader(new FileReader(caminho))) {
@@ -28,16 +29,23 @@ public class UtilsArquivo {
     }
 
     public static void salvarArquivo(ArrayList<Reserva> lista, String subpasta, String nomeArquivo) {
-        File pasta = new File("resultados/" + subpasta);
-        File arquivo = new File(pasta, nomeArquivo);
+        File resultados = new File("resultados/" + subpasta);
 
-        try (PrintWriter pw = new PrintWriter(new FileWriter(arquivo))) {
+        if (!resultados.exists()){
+            resultados.mkdirs();
+        }
+        File arquivo = new File(resultados, nomeArquivo);
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo))) {
             for (Reserva r : lista) {
-                pw.println(r.getCodigo() + ";" +
+                String linha = (r.getCodigo() + ";" +
                         r.getNome() + ";" +
                         r.getVoo() + ";" +
                         r.getData() + ";" +
                         r.getAssento());
+
+                bw.write(linha);
+                bw.newLine();
             }
         } catch (IOException e) {
             System.out.println("Erro ao salvar arquivo: " + e.getMessage());

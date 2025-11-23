@@ -11,8 +11,11 @@ public class MainQuickIns {
     public static void main(String[] args) {
         ArrayList<Reserva> lista = new ArrayList<>();
 
-        for (String nomeArquivo : Paths.NOME_ARQUIVOS) {
-            UtilsArquivo.lerArquivo(Paths.BASE_PATH + "/" + nomeArquivo, lista);
+        for (String nomeArquivo : Paths.ARQUIVOS) {
+
+            lista.clear();
+
+            UtilsArquivo.lerArquivo(Paths.BASE_PATH + nomeArquivo, lista);
             QuickIns.ordenarArquivoQuickIns(lista, 0, lista.size() - 1);
             UtilsArquivo.salvarArquivo(lista, "quickIns", "quickIns__" + nomeArquivo);
         }
