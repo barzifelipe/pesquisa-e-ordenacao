@@ -20,12 +20,13 @@ public class processadorPesquisa {
 
         for (String nomeArquivo : Paths.ARQUIVOS) {
 
+            Arquivo.limparArquivo("ABB", "abb_" + nomeArquivo);
             long tempoTotal = 0;
 
             for (int i = 1; i <= REPETICOES; i++) {
 
                 ArrayList<Reserva> lista = new ArrayList<>();
-                //lista.clear();
+
                 Arquivo.lerArquivo(Paths.BASE_PATH + nomeArquivo, lista);
 
                 ABB arvore = new ABB();
@@ -64,6 +65,7 @@ public class processadorPesquisa {
 
         for (String nomeArquivo : Paths.ARQUIVOS) {
 
+            Arquivo.limparArquivo("AVL", "avl_" + nomeArquivo);
             long tempoTotal = 0;
 
             for (int i = 1; i <= REPETICOES; i++) {
@@ -101,6 +103,7 @@ public class processadorPesquisa {
 
         for (String nomeArquivo : Paths.ARQUIVOS) {
 
+            Arquivo.limparArquivo("Hashing", "hashing_" + nomeArquivo);
             long tempoTotal = 0;
 
             for (int i = 1; i <= REPETICOES; i++) {

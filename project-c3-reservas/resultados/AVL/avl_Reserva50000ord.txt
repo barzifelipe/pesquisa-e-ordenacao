@@ -1,9 +1,3 @@
-NOME IGOR LOPES:
-Reserva: R010084 Voo: V309 Data: 20/04/2025 Assento: 129E
-Reserva: R037092 Voo: V824 Data: 27/07/2024 Assento: 136F
-Reserva: R037747 Voo: V815 Data: 21/11/2023 Assento: 4F
-TOTAL: 3 reservas
-
 NOME ISABEL COSTALONGA DIAS OLIVEIRA:
 Reserva: R003204 Voo: V470 Data: 22/11/2024 Assento: 74E
 Reserva: R004609 Voo: V842 Data: 27/09/2025 Assento: 7F

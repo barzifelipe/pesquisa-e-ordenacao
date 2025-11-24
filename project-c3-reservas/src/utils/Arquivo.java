@@ -102,5 +102,14 @@ public class Arquivo {
              System.out.println("Erro ao salvar arquivo: " + e.getMessage());
         }
     }
+
+    public static void limparArquivo(String subpasta, String nomeArquivo) {
+        File resultados = new File("project-c3-reservas/resultados/" + subpasta);
+        File arquivo = new File(resultados, nomeArquivo);
+
+        if (arquivo.exists()) {
+            arquivo.delete();
+        }
+    }
 }
 
