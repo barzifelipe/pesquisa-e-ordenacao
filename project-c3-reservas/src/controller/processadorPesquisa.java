@@ -4,6 +4,7 @@ import model.Reserva;
 import search.ABB;
 import search.AVL;
 import search.HashingEncadeado;
+import search.NoAVL;
 import utils.Arquivo;
 import utils.Paths;
 
@@ -68,7 +69,6 @@ public class processadorPesquisa {
             for (int i = 1; i <= REPETICOES; i++) {
 
                 ArrayList<Reserva> lista = new ArrayList<>();
-                //lista.clear();
                 Arquivo.lerArquivo(Paths.BASE_PATH + nomeArquivo, lista);
 
                 AVL arvore = new AVL();
@@ -80,10 +80,6 @@ public class processadorPesquisa {
                 }
 
                 ArrayList<String> listaDeNomes = Arquivo.lerNomes(Paths.BASE_PATH + "nome.txt");
-
-                for(String nome : listaDeNomes){
-                    arvore.pesquisar(nome);
-                }
 
                 for(String nome : listaDeNomes){
                     ArrayList<Reserva> resultados = arvore.pesquisar(nome);

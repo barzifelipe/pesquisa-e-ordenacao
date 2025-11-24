@@ -7,102 +7,87 @@ public class AVL {
 
     private NoAVL raiz = null;
 
-    public void inserir(Reserva r){
-        if (r == null || r.getNome() == null) {
-            return;
-        }
-        raiz = inserir(r, raiz );
+    private NoAVL rotacaoDireita(NoAVL y) {
+        NoAVL x = y.getEsq();
+        NoAVL t2 = x.getDir();
+        x.setDir(y);
+        y.setEsq(t2);
+        y.atualizarAltura(y);
+        x.atualizarAltura(x);
+        return x;
     }
 
-    private NoAVL inserir(Reserva r, NoAVL no) {
-        if (no == null) {
-            return new NoAVL(r.getNome(), r);
-        }
+    private NoAVL rotacaoEsquerda(NoAVL x) {
+        NoAVL y = x.getDir();
+        NoAVL t2 = y.getEsq();
+        y.setEsq(x);
+        x.setDir(t2);
+        x.atualizarAltura(x);
+        y.atualizarAltura(y);
+        return y;
+    }
 
-        int comp = r.getNome().trim().compareToIgnoreCase(no.getNome().trim());
-        if (comp < 0) {
-            no.setEsq(inserir(r, no.getEsq()));
-        } else if (comp > 0) {
-            no.setDir(inserir(r, no.getDir()));
-        } else {
-            no.getReservas().add(r);
-            return no;
-        }
+    public void inserir(Reserva r) {
+        if (r.getNome() == null || r.getNome().isBlank() || r == null) return;
+        raiz = inserirRec(raiz, r.getNome().trim(), r);
+    }
 
-        no.atualizarAltura();
+    private NoAVL inserirRec(NoAVL no, String nome, Reserva r) {
+        if (no == null) return new NoAVL(nome, r);
 
+        int cmp = nome.compareToIgnoreCase(no.getNome());
+        if (cmp < 0) no.setEsq(inserirRec(no.getEsq(), nome, r));
+        else if (cmp > 0) no.setDir(inserirRec(no.getDir(), nome, r));
+        else no.getReservas().add(r);
+
+        no.atualizarAltura(no);
         return balancear(no);
     }
 
-
     private NoAVL balancear(NoAVL no) {
-        int fb = no.getFatorBalanceamento();
+        int fb = no.getFatorBalanceamento(no);
 
-        if (fb > 1) { // esquerda pesada
-            if (no.getEsq().getFatorBalanceamento() < 0) {
-                no.setEsq(rotacaoEsquerda(no.getEsq()));
-            }
-            no = rotacaoDireita(no);
-        } else if (fb < -1) { // direita pesada
-            if (no.getDir().getFatorBalanceamento() > 0) {
-                no.setDir(rotacaoDireita(no.getDir()));
-            }
-            no = rotacaoEsquerda(no);
+        if (fb > 1) {
+            if (no.getFatorBalanceamento(no.getEsq()) < 0) no.setEsq(rotacaoEsquerda(no.getEsq()));
+            return rotacaoDireita(no);
+        }
+
+        if (fb < -1) {
+            if (no.getFatorBalanceamento(no.getDir()) > 0) no.setDir(rotacaoDireita(no.getDir()));
+            return rotacaoEsquerda(no);
         }
 
         return no;
     }
 
 
-    private NoAVL rotacaoDireita(NoAVL y) {
-        NoAVL x = y.getEsq();
-        NoAVL T2 = x.getDir();
-
-        x.setDir(y);
-        y.setEsq(T2);
-
-        y.atualizarAltura();
-        x.atualizarAltura();
-
-        return x;
-    }
-
-
-    private NoAVL rotacaoEsquerda(NoAVL x) {
-        NoAVL y = x.getDir();
-        NoAVL T2 = y.getEsq();
-
-        y.setEsq(x);
-        x.setDir(T2);
-
-        x.atualizarAltura();
-        y.atualizarAltura();
-
-        return y;
-    }
-
     public ArrayList<Reserva> pesquisar(String nomeBuscado) {
-
-        if (nomeBuscado == null || nomeBuscado.isEmpty())
+        if (nomeBuscado == null || nomeBuscado.isBlank())
             return new ArrayList<>();
 
-        NoAVL atual = raiz;
+        NoAVL no = pesquisarRec(raiz, nomeBuscado.trim());
 
-        while (atual != null) {
+        if (no != null) {
+            return no.getReservas();
+        } else {
+            return new ArrayList<>();
+        }
+    }
 
-            int comp = nomeBuscado.compareToIgnoreCase(atual.getNome());
-
-            if (comp == 0) {
-                return atual.getReservas();
-            }
-            else if (comp < 0) {
-                atual = atual.getEsq();
-            }
-            else {
-                atual = atual.getDir();
-            }
+    private NoAVL pesquisarRec(NoAVL no, String nome) {
+        if (no == null){
+            return null;
         }
 
-        return new ArrayList<>();
+        int comp = nome.compareToIgnoreCase(no.getNome());
+        if (comp == 0){
+            return no;
+        }
+        if (comp < 0){
+            return pesquisarRec(no.getEsq(), nome);
+        }
+        else {
+            return pesquisarRec(no.getDir(), nome);
+        }
     }
 }

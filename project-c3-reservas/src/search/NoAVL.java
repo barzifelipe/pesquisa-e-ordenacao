@@ -23,20 +23,19 @@ public class NoAVL {
     public void setEsq(NoAVL esq) { this.esq = esq; }
     public void setDir(NoAVL dir) { this.dir = dir; }
 
-    public void atualizarAltura() {
-        int alturaEsq;
-        if (esq == null) {
-            alturaEsq = 0;
-        } else {
-            alturaEsq = esq.altura;
+    public int getAltura() {
+        return altura;
+    }
+
+    public void atualizarAltura(NoAVL no) {
+        int alturaEsq = 0;
+        if (no.getEsq() != null) {
+            alturaEsq = no.getEsq().getAltura();
         }
 
-        int alturaDir;
-        if(dir == null){
-            alturaDir = 0;
-        }
-        else{
-            alturaDir = dir.altura;
+        int alturaDir = 0;
+        if (no.getDir() != null) {
+            alturaDir = no.getDir().getAltura();
         }
 
         if (alturaEsq > alturaDir) {
@@ -47,22 +46,22 @@ public class NoAVL {
 
     }
 
-    public int getFatorBalanceamento() {
+    public int getFatorBalanceamento(NoAVL no) {
         int alturaEsq;
-        if (esq == null) {
+        if (no.getEsq() == null) {
             alturaEsq = 0;
         } else {
-            alturaEsq = esq.altura;
+            alturaEsq = no.getEsq().getAltura();
         }
 
         int alturaDir;
-        if(dir == null){
+        if (no.getDir() == null) {
             alturaDir = 0;
-        }
-        else{
-            alturaDir = dir.altura;
+        } else {
+            alturaDir = no.getDir().getAltura();
         }
 
         return alturaEsq - alturaDir;
     }
+
 }
