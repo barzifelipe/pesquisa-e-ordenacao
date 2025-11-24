@@ -54,7 +54,8 @@ public class Arquivo {
         }
     }
 
-    public static void lerNomes(String caminho, ArrayList<String> nomes){
+    public static ArrayList<String> lerNomes(String caminho){
+        ArrayList<String> nomes = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(caminho))) {
             String linha;
 
@@ -66,6 +67,8 @@ public class Arquivo {
         catch (IOException e){
             System.out.println("Erro ao ler nomes: " + e.getMessage());
         }
+
+        return nomes;
     }
 
     public static void salvarResultadoPesquisa(String nome, ArrayList<Reserva> lista, String subpasta, String nomeArquivo) {
@@ -78,7 +81,7 @@ public class Arquivo {
 
         File arquivo = new File(resultados, nomeArquivo);
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo, true))) {
             bw.write("NOME " + nome + ":");
             bw.newLine();
             if (lista == null || lista.isEmpty()) {

@@ -3,13 +3,14 @@ package search;
 import model.Reserva;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class ABB {
 
-    private NoABB raiz;
+    private NoABB raiz = null;
 
     public void inserir(Reserva r){
-        String nome =r.getNome();
+        String nome =r.getNome().trim();
 
         if (raiz == null){
             raiz = new NoABB(nome);
@@ -47,35 +48,48 @@ public class ABB {
         }
     }
 
-    private void camCentral(NoABB no, ArrayList<NoABB> lista){
-        if (no == null){
-            return;
+    private void camCentralIterativa(NoABB no, ArrayList<NoABB> lista){
+        Stack<NoABB> stack = new Stack<>();
+        NoABB atual = raiz;
+
+        while (true) {
+            while (atual != null) {
+                stack.push(atual);
+                atual = atual.getEsq();
+            }
+
+            if (stack.isEmpty()) {
+                break;
+            }
+
+            atual = stack.pop();
+            lista.add(atual);
+            atual = atual.getDir();
         }
-        camCentral(no.getEsq(), lista);
-        lista.add(no);
-        camCentral(no.getDir(), lista);
     }
 
     private NoABB construirBalanceada(ArrayList<NoABB> lista, int inicio, int fim){
-        if (inicio > fim) return null;
-
+        if (inicio > fim){
+            return null;
+        }
         int meio = (inicio + fim) / 2;
 
-        NoABB original = lista.get(meio);
-        NoABB novo = new NoABB(original.getNome());
-        novo.setReservas(original.getReservas());
+        NoABB raiz = lista.get(meio);
 
-        novo.setEsq(construirBalanceada(lista, inicio, meio - 1));
-        novo.setDir(construirBalanceada(lista, meio + 1, fim));
 
-        return novo;
+        raiz.setEsq(construirBalanceada(lista, inicio, meio - 1));
+        raiz.setDir(construirBalanceada(lista, meio + 1, fim));
+
+        return raiz;
     }
 
     public void balancear(){
-        if (raiz == null) return;
+        if (raiz == null) {
+            return;
+        }
 
         ArrayList<NoABB> lista = new ArrayList<>();
-        camCentral(raiz, lista);
+        camCentralIterativa(raiz, lista);
 
         raiz = construirBalanceada(lista, 0, lista.size() - 1);
     }

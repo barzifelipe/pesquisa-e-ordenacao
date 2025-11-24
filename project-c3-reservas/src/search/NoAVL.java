@@ -41,7 +41,7 @@ public class NoAVL {
         this.dir = dir;
     }
 
-    public void setReservas(ArrayList<Reserva> reservas) {
-        this.reservas = reservas;
+    public int getAltura(){
+        return altura;
     }
 }

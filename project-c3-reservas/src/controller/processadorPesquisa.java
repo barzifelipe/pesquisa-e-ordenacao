@@ -20,24 +20,30 @@ public class processadorPesquisa {
             long tempoTotal = 0;
 
             for (int i = 1; i <= REPETICOES; i++) {
+
                 ArrayList<Reserva> lista = new ArrayList<>();
-                lista.clear();
+                //lista.clear();
                 Arquivo.lerArquivo(Paths.BASE_PATH + nomeArquivo, lista);
 
                 ABB arvore = new ABB();
 
                 long inicio = System.nanoTime();
+
                 for (Reserva r : lista) {
                     arvore.inserir(r);
                 }
+
                 arvore.balancear();
 
-                ArrayList<String> nomesPesquisa = new ArrayList<>();
-                Arquivo.lerNomes(Paths.BASE_PATH + "nome.txt", nomesPesquisa);
+                ArrayList<String> listaDeNomes = Arquivo.lerNomes(Paths.BASE_PATH + "nome.txt");
 
-                for(String nome : nomesPesquisa){
-                    ArrayList<Reserva> reservasEncontradas = arvore.pesquisar(nome);
-                    Arquivo.salvarResultadoPesquisa(nome, lista,"ABB","abb_" + nomeArquivo);
+                for(String nome : listaDeNomes){
+                    arvore.pesquisar(nome);
+                }
+
+                for(String nome : listaDeNomes){
+                    ArrayList<Reserva> resultados = arvore.pesquisar(nome);
+                    Arquivo.salvarResultadoPesquisa(nome, resultados,"ABB","abb_" + nomeArquivo);
                 }
 
                 long fim = System.nanoTime();

@@ -13,6 +13,8 @@ public class NoABB {
     public NoABB(String nome) {
         this.nome = nome;
         this.reservas = new ArrayList<>();
+        this.esq = null;
+        this.dir = null;
     }
 
     public String getNome() {
@@ -39,7 +41,5 @@ public class NoABB {
         this.dir = dir;
     }
 
-    public void setReservas(ArrayList<Reserva> reservas) {
-        this.reservas = reservas;
-    }
+
 }

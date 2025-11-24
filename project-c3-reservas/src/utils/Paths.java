@@ -21,7 +21,5 @@ public class Paths  {
             "Reserva50000ord.txt"
     };
 
-    public static final String [] NOMES = {
-            "nome.txt"
-    };
+
 }
