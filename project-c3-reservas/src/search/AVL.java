@@ -15,9 +15,11 @@ public class AVL {
     }
 
     private NoAVL inserir(Reserva r, NoAVL no) {
-        if (no == null) return new NoAVL(r.getNome(), r);
+        if (no == null) {
+            return new NoAVL(r.getNome(), r);
+        }
 
-        int comp = r.getNome().compareToIgnoreCase(no.getNome());
+        int comp = r.getNome().trim().compareToIgnoreCase(no.getNome().trim());
         if (comp < 0) {
             no.setEsq(inserir(r, no.getEsq()));
         } else if (comp > 0) {
@@ -38,12 +40,12 @@ public class AVL {
 
         if (fb > 1) { // esquerda pesada
             if (no.getEsq().getFatorBalanceamento() < 0) {
-                no.setEsq(rotacaoEsquerda(no.getEsq())); // rotação dupla
+                no.setEsq(rotacaoEsquerda(no.getEsq()));
             }
             no = rotacaoDireita(no);
         } else if (fb < -1) { // direita pesada
             if (no.getDir().getFatorBalanceamento() > 0) {
-                no.setDir(rotacaoDireita(no.getDir())); // rotação dupla
+                no.setDir(rotacaoDireita(no.getDir()));
             }
             no = rotacaoEsquerda(no);
         }
